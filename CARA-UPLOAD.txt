@@ -1,0 +1,25 @@
+CARA GANTI ISI REPO (penting)
+
+1. Buka folder repo yang lama.
+2. Hapus file lama yang bentrok: index.html, css/, js/.
+3. Copy isi zip ini ke AKAR repo.
+   Yang benar:
+     repo/index.html
+     repo/css/styles.css
+     repo/js/app.js
+     repo/js/config.js
+     repo/CNAME
+   Yang salah:
+     repo/monmongames-full/index.html
+
+4. Jangan hapus file CNAME. Isinya harus:
+   monmon.silverhawk.web.id
+
+5. Folder private/ JANGAN di-commit kalau tidak perlu.
+   File Code.gs di dalamnya hanya untuk ditempel di editor script backend.
+
+6. Commit + push, lalu tunggu 1-2 menit.
+   Buka: https://monmon.silverhawk.web.id/
+
+Kalau halaman sempat kosong di HP, itu karena script pengunci lama.
+Versi ini sudah tanpa script itu.

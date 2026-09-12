@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monmon Games Hub</title>
+  <meta name="description" content="Katalog game Monmon Games Hub milik Muhammad Rizky Azri Mulyana.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#">
+        <span class="logo">M</span>
+        <span data-site-name>Monmon Games Hub</span>
+      </a>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="randomBtn" type="button">Acak</button>
+        <button class="btn btn-primary" data-open-add type="button">+ Game</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <div>
+          <div class="kicker">Monmon Games Hub</div>
+          <h1>Kumpulan game yang rapi, bisa dilike, dikomentari, dan ditraktir kopi.</h1>
+          <p>
+            Mainkan, simpan favorit, kasih likes, dan tulis komentar yang sopan.
+            Kalau suka karyanya, traktir kopi lewat GoPay atau DANA.
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="countGames">0</b><span>Game terdaftar</span></div>
+          <div class="stat"><b id="countFavs">0</b><span>Favorit di perangkat ini</span></div>
+          <div class="stat">
+            <b><span class="status-dot" id="statusDot"></span> <span id="hubStatus">Memuat</span></b>
+            <span>Status</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="search">
+        <span>⌕</span>
+        <input id="search" type="search" placeholder="Cari nama, kategori, atau deskripsi..." autocomplete="off">
+      </div>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <span data-site-name>Monmon Games Hub</span> · <span id="ownerName"></span>
+  </footer>
+
+  <button class="btn btn-primary fab" data-open-add type="button">+ Game</button>
+
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Tambah game</h2>
+      <p class="hint">Hanya pemilik yang tahu password yang bisa menambahkan link.</p>
+      <form class="form" id="addForm">
+        <div>
+          <label for="title">Nama game</label>
+          <input id="title" name="title" required placeholder="Contoh: Space Dash">
+        </div>
+        <div>
+          <label for="url">Link game</label>
+          <input id="url" name="url" type="url" required placeholder="https://...">
+        </div>
+        <div>
+          <label for="description">Deskripsi singkat</label>
+          <textarea id="description" name="description" placeholder="Game tentang apa?"></textarea>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="category">Kategori</label>
+            <select id="category" name="category"></select>
+          </div>
+          <div>
+            <label for="author">Pembuat</label>
+            <input id="author" name="author" placeholder="Nama atau username">
+          </div>
+        </div>
+        <div>
+          <label for="thumbnail">Link gambar sampul (opsional)</label>
+          <input id="thumbnail" name="thumbnail" type="url" placeholder="https://...">
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required placeholder="Masukkan password">
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="closeModal" type="button">Batal</button>
+          <button class="btn btn-primary" type="submit">Simpan game</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="commentBg">
+    <div class="modal modal-wide" role="dialog" aria-labelledby="commentTitle">
+      <h2 id="commentTitle">Komentar</h2>
+      <p class="hint">Tulis yang sopan. Kata kasar tidak akan disimpan.</p>
+      <div class="comment-list" id="commentList"></div>
+      <form class="form" id="commentForm">
+        <input type="hidden" name="gameId" id="commentGameId">
+        <div class="form-row">
+          <div>
+            <label for="commentName">Nama</label>
+            <input id="commentName" name="name" required maxlength="24" placeholder="Nama kamu">
+          </div>
+          <div>
+            <label for="commentMessage">Komentar</label>
+            <input id="commentMessage" name="message" required maxlength="180" placeholder="Tulis komentar sopan...">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="closeComment" type="button">Tutup</button>
+          <button class="btn btn-primary" type="submit">Kirim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="donateBg">
+    <div class="modal" role="dialog" aria-labelledby="donateTitle">
+      <h2 id="donateTitle">Traktir kopi</h2>
+      <p class="hint" id="donateHint">Kalau kamu suka gamenya, kirim secangkir kopi ya.</p>
+      <div class="pay-grid">
+        <div class="pay-card">
+          <b>GoPay</b>
+          <code id="gopayNum"></code>
+          <button class="btn btn-ghost" type="button" id="copyGopay">Salin nomor</button>
+        </div>
+        <div class="pay-card">
+          <b>DANA</b>
+          <code id="danaNum"></code>
+          <button class="btn btn-ghost" type="button" id="copyDana">Salin nomor</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="closeDonate" type="button">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
